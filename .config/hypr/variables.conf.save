@@ -1,0 +1,96 @@
+# ### Hyprland ###
+# Apps
+$terminal = kitty
+$browser = firefox
+$editor = codium
+$fileExplorer = nemo
+
+# Touchpad
+$touchpadDisableTyping = true
+$touchpadScrollFactor = 0.3
+$workspaceSwipeFingers = 4
+$gestureFingers = 3
+$gestureFingersMore = 4
+
+# Blur
+$blurEnabled = true
+$blurSpecialWs = false
+$blurPopups = true
+$blurInputMethods = true
+$blurSize = 8
+$blurPasses = 2
+$blurXray = false
+
+# Shadow
+$shadowEnabled = true
+$shadowRange = 20
+$shadowRenderPower = 3
+$shadowColour = rgba($surfaced4)
+
+# Gaps
+$workspaceGaps = 20
+$windowGapsIn = 10
+$windowGapsOut = 20
+$singleWindowGapsOut = 15
+
+# Window styling
+$windowOpacity = 0.95
+$windowRounding = 10
+
+$windowBorderSize = 3
+$activeWindowBorderColour = rgba($primarye6)
+$inactiveWindowBorderColour = rgba($onSurfaceVariant11)
+
+# Misc
+$volumeStep = 10  # In percent
+$cursorTheme = sweet-cursors
+$cursorSize = 24
+
+
+# ### Keybinds ###
+# Workspaces
+$kbMoveWinToWs = Shift+Alt
+$kbMoveWinToWsGroup = Ctrl+Super+Alt
+$kbGoToWs = Alt
+$kbGoToWsGroup = Ctrl+Super
+
+$kbNextWs = Shift+Alt, right
+$kbPrevWs = Shift+Alt, left
+
+$kbToggleSpecialWs = Alt+Super, S
+
+# Window groups
+$kbWindowGroupCycleNext = Alt, Tab
+$kbWindowGroupCyclePrev = Shift+Alt, Tab
+$kbUngroup = Alt, U
+$kbToggleGroup = Alt, Comma
+
+# Window actions
+$kbMoveWindow = Alt, Z
+$kbResizeWindow = Alt, X
+$kbWindowPip = Super+Alt, Backslash
+$kbPinWindow = Alt, P
+$kbWindowFullscreen = Alt, F
+$kbWindowBorderedFullscreen = Super+Alt, F
+$kbToggleWindowFloating = Alt, V
+$kbCloseWindow = Alt, C
+
+# Special workspace toggles
+$kbSystemMonitor = Ctrl+Shift, Escape
+$kbMusic = Alt, M
+$kbCommunication = AltD+Shift, D
+$kbTodo = Alt, R
+
+# Apps
+$kbTerminal = Alt, Q
+$kbBrowser = Alt, B
+$kbEditor = Super, C
+$kbFileExplorer = Alt, E
+$kbYTMusic = Alt, Y
+
+# Misc
+$kbSession = Ctrl+Alt, Delete
+$kbClearNotifs = Ctrl+Alt, C
+$kbShowPanels = Alt, K
+$kbLock = Alt, L
+$kbRestoreLock = Super+Alt, L

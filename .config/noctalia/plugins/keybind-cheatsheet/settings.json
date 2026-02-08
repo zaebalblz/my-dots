@@ -1,0 +1,11 @@
+{
+  "cheatsheetData": [],
+  "detectedCompositor": "hyprland",
+  "niriConfigPath": "~/.config/niri/config.kdl",
+  "hyprlandConfigPath": "~/.config/hypr/hyprland.conf",
+  "modKeyVariable": "$mod",
+  "windowHeight": 1000,
+  "windowWidth": 1400,
+  "autoHeight": false,
+  "columnCount": 4
+}
