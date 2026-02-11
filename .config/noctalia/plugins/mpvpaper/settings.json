@@ -1,4 +1,20 @@
 {
   "active": true,
-  "thumbCacheReady": true
+  "thumbCacheReady": true,
+  "isPlaying": true,
+  "isMuted": true,
+  "currentWallpaper": "/home/linuxoed/Pictures/Wallpapers/МУЖИК ЕСТ ЧИПСЫ 8K 60FPS🍿🍿🍿.mp4",
+  "wallpapersFolder": "/home/linuxoed/Pictures/Wallpapers",
+  "hardwareAcceleration": false,
+  "mpvSocket": "/tmp/mpv-socket",
+  "profile": "default",
+  "fillMode": "fit",
+  "automation": false,
+  "automationMode": "random",
+  "automationTime": 300,
+  "oldWallpapers": {
+    "DP-3": "/home/linuxoed/Pictures/Wallpapers/wallhaven-3q3j6y_3840x2160.png",
+    "eDP-1": "/home/linuxoed/Pictures/Wallpapers/wallhaven-3q3j6y_3840x2160.png"
+  }
 }
+
