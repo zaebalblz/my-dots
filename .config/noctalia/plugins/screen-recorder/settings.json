@@ -9,7 +9,8 @@
   "colorRange": "full",
   "showCursor": true,
   "copyToClipboard": true,
-  "audioSource": "default_input",
+  "audioSource": "default_output",
   "videoSource": "portal",
-  "resolution": "original"
+  "resolution": "1920x1080",
+  "iconColor": "none"
 }
