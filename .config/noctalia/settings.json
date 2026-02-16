@@ -654,10 +654,6 @@
         "activeTemplates": [
             {
                 "enabled": true,
-                "id": "btop"
-            },
-            {
-                "enabled": true,
                 "id": "mango"
             },
             {
@@ -762,11 +758,15 @@
             },
             {
                 "enabled": true,
-                "id": "code"
+                "id": "yazi"
             },
             {
                 "enabled": true,
-                "id": "yazi"
+                "id": "btop"
+            },
+            {
+                "enabled": true,
+                "id": "code"
             }
         ],
         "enableUserTheming": true
@@ -779,7 +779,7 @@
         "fontDefaultScale": 1,
         "fontFixed": "UbuntuMono Nerd Font",
         "fontFixedScale": 1.14,
-        "networkPanelView": "ethernet",
+        "networkPanelView": "wifi",
         "panelBackgroundOpacity": 0.76,
         "panelsAttachedToBar": true,
         "settingsPanelMode": "attached",
