@@ -792,6 +792,19 @@
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [
+            {
+                "colorScheme": "Peche",
+                "darkMode": true,
+                "generationMethod": "faithful",
+                "paletteColors": [
+                    "#b9efa4",
+                    "#a9eab9",
+                    "#f7facb",
+                    "#fd4663"
+                ],
+                "path": "/home/linuxoed/Pictures/Wallpapers/wallhaven-3q3j6y_3840x2160.png",
+                "useWallpaperColors": true
+            }
         ],
         "fillColor": "#000000",
         "fillMode": "crop",
