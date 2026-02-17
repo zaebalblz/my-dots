@@ -1,0 +1,23 @@
+{
+  "inputDevices": [
+    "/dev/input/event257",
+    "/dev/input/event256",
+    "/dev/input/event259",
+    "/dev/input/event260",
+    "/dev/input/event258",
+    "/dev/input/event31",
+    "/dev/input/event12",
+    "/dev/input/event7",
+    "/dev/input/event11",
+    "/dev/input/event10",
+    "/dev/input/event4",
+    "/dev/input/event8",
+    "/dev/input/event9"
+  ],
+  "catColor": "default",
+  "catSize": 0.72,
+  "catOffsetY": 0.039999999999999994,
+  "raveMode": false,
+  "tappyMode": false,
+  "useMprisFilter": false
+}

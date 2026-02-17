@@ -156,6 +156,19 @@
                 },
                 {
                     "defaultSettings": {
+                        "catColor": "default",
+                        "catOffsetY": 0,
+                        "catSize": 1,
+                        "idleTimeout": 150,
+                        "raveMode": false,
+                        "tappyMode": false,
+                        "useMprisFilter": false,
+                        "waitingTimeout": 30000
+                    },
+                    "id": "plugin:27ae3a:slowbongo"
+                },
+                {
+                    "defaultSettings": {
                         "customColor": "none",
                         "showConditionIcon": true,
                         "showTempUnit": true,
@@ -779,7 +792,7 @@
         "fontDefaultScale": 1,
         "fontFixed": "UbuntuMono Nerd Font",
         "fontFixedScale": 1.14,
-        "networkPanelView": "wifi",
+        "networkPanelView": "ethernet",
         "panelBackgroundOpacity": 0.76,
         "panelsAttachedToBar": true,
         "settingsPanelMode": "attached",

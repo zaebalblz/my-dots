@@ -4,9 +4,18 @@
             "enabled": true,
             "name": "Noctalia Plugins",
             "url": "https://github.com/noctalia-dev/noctalia-plugins"
+        },
+        {
+            "enabled": true,
+            "name": "cat-bongo",
+            "url": "https://github.com/tuibird/slowbongo"
         }
     ],
     "states": {
+        "27ae3a:slowbongo": {
+            "enabled": true,
+            "sourceUrl": "https://github.com/tuibird/slowbongo"
+        },
         "activate-linux": {
             "enabled": false,
             "sourceUrl": "https://github.com/noctalia-dev/noctalia-plugins"
