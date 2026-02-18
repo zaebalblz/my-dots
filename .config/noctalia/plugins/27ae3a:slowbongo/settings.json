@@ -12,7 +12,15 @@
     "/dev/input/event10",
     "/dev/input/event4",
     "/dev/input/event8",
-    "/dev/input/event9"
+    "/dev/input/event9",
+    "/dev/input/event5",
+    "/dev/input/event15",
+    "/dev/input/event18",
+    "/dev/input/event20",
+    "/dev/input/event19",
+    "/dev/input/event22",
+    "/dev/input/event24",
+    "/dev/input/event30"
   ],
   "catColor": "default",
   "catSize": 0.72,
