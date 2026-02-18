@@ -12,8 +12,8 @@ import qs.Widgets
 SmartPanel {
   id: root
 
-  preferredWidth: 1500 * Style.uiScaleRatio
-  preferredHeight: 700 * Style.uiScaleRatio
+  preferredWidth: 1300 * Style.uiScaleRatio
+  preferredHeight: 750 * Style.uiScaleRatio
   preferredWidthRatio: 0.5
   preferredHeightRatio: 0.45
 
@@ -1039,7 +1039,7 @@ SmartPanel {
           positionViewAtBeginning();
         }
 
-        property int columns: 5
+        property int columns: 8
         property int itemSize: cellWidth
 
         cellWidth: Math.floor((availableWidth - leftMargin - rightMargin) / columns)
@@ -1511,7 +1511,7 @@ SmartPanel {
             positionViewAtBeginning();
           }
 
-          property int columns: 5
+          property int columns: 8
           property int itemSize: cellWidth
 
           cellWidth: Math.floor((availableWidth - leftMargin - rightMargin) / columns)

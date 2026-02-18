@@ -160,8 +160,6 @@ Variants {
         visible: false
         cache: true // Cached so Overview can share the same texture
         asynchronous: true
-        layer.enabled: true
-        layer.smooth: true
         onStatusChanged: {
           if (status === Image.Error) {
             Logger.w("Current wallpaper failed to load:", source);
@@ -182,8 +180,6 @@ Variants {
         visible: false
         cache: false // Not cached - temporary during transitions
         asynchronous: true
-        layer.enabled: true
-        layer.smooth: true
         onStatusChanged: {
           if (status === Image.Error) {
             Logger.w("Next wallpaper failed to load:", source);
@@ -303,13 +299,13 @@ Variants {
           property real centerX: root.discCenterX
           property real centerY: root.discCenterY
 
-          // DMS Compatibility
+          // Fill mode properties
           property real fillMode: root.fillMode
           property vector4d fillColor: root.fillColor
-          property real imageWidth1: currentWallpaper.sourceSize.width
-          property real imageHeight1: currentWallpaper.sourceSize.height
-          property real imageWidth2: nextWallpaper.sourceSize.width
-          property real imageHeight2: nextWallpaper.sourceSize.height
+          property real imageWidth1: source1.sourceSize.width
+          property real imageHeight1: source1.sourceSize.height
+          property real imageWidth2: source2.sourceSize.width
+          property real imageHeight2: source2.sourceSize.height
           property real screenWidth: width
           property real screenHeight: height
 
@@ -685,8 +681,7 @@ Variants {
         }
 
         // Ensure the transition type really exists
-        // if (transitionType !== "none" && !allTransitions.includes(transitionType)) {
-            if (false) {
+        if (transitionType !== "none" && !allTransitions.includes(transitionType)) {
           transitionType = "fade";
         }
 
@@ -694,10 +689,6 @@ Variants {
         switch (transitionType) {
         case "none":
           setWallpaperImmediate(futureWallpaper);
-          break;
-        case "iris_bloom":
-        case "portal":
-          setWallpaperWithTransition(futureWallpaper);
           break;
         case "wipe":
           wipeDirection = Math.random() * 4;
@@ -749,8 +740,7 @@ Variants {
         }
 
         // Ensure the transition type really exists
-        // if (transitionType !== "none" && !allTransitions.includes(transitionType)) {
-            if (false) {
+        if (transitionType !== "none" && !allTransitions.includes(transitionType)) {
           transitionType = "fade";
         }
 
