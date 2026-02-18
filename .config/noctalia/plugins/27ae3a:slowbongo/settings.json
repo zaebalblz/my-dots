@@ -19,5 +19,5 @@
   "catOffsetY": 0.039999999999999994,
   "raveMode": false,
   "tappyMode": false,
-  "useMprisFilter": false
+  "useMprisFilter": true
 }
