@@ -642,6 +642,13 @@
                 "countdownEnabled": true,
                 "enabled": true,
                 "keybind": "6"
+            },
+            {
+                "action": "rebootToUefi",
+                "command": "",
+                "countdownEnabled": true,
+                "enabled": true,
+                "keybind": ""
             }
         ],
         "showHeader": true,
@@ -840,9 +847,9 @@
         "setWallpaperOnAllMonitors": true,
         "showHiddenFiles": true,
         "skipStartupTransition": false,
-        "solidColor": "#1a1a2e",
+        "solidColor": "#1a00ff",
         "sortOrder": "date_desc",
-        "transitionDuration": 1000,
+        "transitionDuration": 2300,
         "transitionEdgeSmoothness": 0,
         "transitionType": "random",
         "useSolidColor": false,
