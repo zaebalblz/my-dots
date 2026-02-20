@@ -507,14 +507,14 @@ Variants {
 
         Behavior on opacity {
           NumberAnimation {
-            duration: Style.animationNormal
+            duration: 140
             easing.type: Easing.InOutQuad
           }
         }
 
         Behavior on scale {
           NumberAnimation {
-            duration: Style.animationNormal
+            duration: 140
             easing.type: Easing.InOutQuad
           }
         }
@@ -527,7 +527,7 @@ Variants {
 
         Timer {
           id: visibilityTimer
-          interval: Style.animationNormal + 50
+          interval: 140 + 50
           onTriggered: {
             osdItem.visible = false;
             root.currentOSDType = -1;
@@ -587,7 +587,7 @@ Variants {
 
               Behavior on color {
                 ColorAnimation {
-                  duration: Style.animationNormal
+                  duration: 140
                   easing.type: Easing.InOutQuad
                 }
               }
@@ -624,13 +624,13 @@ Variants {
 
                 Behavior on width {
                   NumberAnimation {
-                    duration: Style.animationNormal
+                    duration: 140
                     easing.type: Easing.InOutQuad
                   }
                 }
                 Behavior on color {
                   ColorAnimation {
-                    duration: Style.animationNormal
+                    duration: 140
                     easing.type: Easing.InOutQuad
                   }
                 }
@@ -755,13 +755,13 @@ Variants {
 
                   Behavior on height {
                     NumberAnimation {
-                      duration: Style.animationNormal
+                      duration: 140
                       easing.type: Easing.InOutQuad
                     }
                   }
                   Behavior on color {
                     ColorAnimation {
-                      duration: Style.animationNormal
+                      duration: 140
                       easing.type: Easing.InOutQuad
                     }
                   }
@@ -779,7 +779,7 @@ Variants {
 
               Behavior on color {
                 ColorAnimation {
-                  duration: Style.animationNormal
+                  duration: 140
                   easing.type: Easing.InOutQuad
                 }
               }

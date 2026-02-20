@@ -315,10 +315,10 @@ Item {
                         deviceMonitor.retryCount++;
 
                         if (!deviceMonitor.hasNotified) {
-                            ToastService.showWarning(
-                                root.pluginApi?.tr("toast.evtest-error") ?? "SlowBongo",
-                                root.pluginApi?.tr("toast.device-disconnected") ?? ("Device disconnected: " + deviceMonitor.modelData)
-                            );
+                            // ToastService.showWarning(
+                            //     root.pluginApi?.tr("toast.evtest-error") ?? "SlowBongo",
+                            //     root.pluginApi?.tr("toast.device-disconnected") ?? ("Device disconnected: " + deviceMonitor.modelData)
+                            // );
                             deviceMonitor.hasNotified = true;
                         }
 
@@ -329,10 +329,10 @@ Item {
                             restartTimer.start();
                         } else {
                             Logger.w("Slow Bongo", "Max retries reached for device: " + deviceMonitor.modelData + ". Giving up.");
-                            ToastService.showInfo(
-                                root.pluginApi?.tr("toast.device-gave-up") ?? "SlowBongo",
-                                root.pluginApi?.tr("toast.device-gave-up-desc") ?? ("Stopped trying to reconnect to: " + deviceMonitor.modelData)
-                            );
+                            // ToastService.showInfo(
+                            //     root.pluginApi?.tr("toast.device-gave-up") ?? "SlowBongo",
+                            //     root.pluginApi?.tr("toast.device-gave-up-desc") ?? ("Stopped trying to reconnect to: " + deviceMonitor.modelData)
+                            // );
                         }
                     } else {
                         restartTimer.interval = deviceMonitor.retryIntervals[0];

@@ -849,7 +849,7 @@
         "skipStartupTransition": false,
         "solidColor": "#1a00ff",
         "sortOrder": "date_desc",
-        "transitionDuration": 1400,
+        "transitionDuration": 2100,
         "transitionEdgeSmoothness": 0,
         "transitionType": "random",
         "useSolidColor": false,

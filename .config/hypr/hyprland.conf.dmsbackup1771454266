@@ -55,9 +55,8 @@ source = /home/linuxoed/.config/hypr/active-colors.conf
 # Performance Mode Overrides
 source = /home/linuxoed/.config/hypr/performance-mode.conf
 
-source = /home/linuxoed/.config/hypr/noctalia/noctalia-colors.conf
-# # source = /home/linuxoed/.config/hypr/dms/colors.conf
+# source = /home/linuxoed/.config/hypr/noctalia/noctalia-colors.conf
+# source = /home/linuxoed/.config/hypr/dms/colors.conf
 
 
 source = ./dms/cursor.conf
-source = ./dms/binds.conf
