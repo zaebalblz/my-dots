@@ -47,7 +47,7 @@
         "displayMode": "always_visible",
         "floating": false,
         "frameRadius": 19,
-        "frameThickness": 11,
+        "frameThickness": 12,
         "hideOnOverview": false,
         "marginHorizontal": 18,
         "marginVertical": 10,
@@ -290,7 +290,7 @@
     "brightness": {
         "brightnessStep": 5,
         "enableDdcSupport": true,
-        "enforceMinimum": true
+        "enforceMinimum": false
     },
     "calendar": {
         "cards": [
@@ -395,8 +395,8 @@
                         "showButtons": true,
                         "showVisualizer": true,
                         "visualizerType": "linear",
-                        "x": 1490,
-                        "y": 969
+                        "x": 1488,
+                        "y": 963
                     },
                     {
                         "diskPath": "/",
@@ -486,7 +486,7 @@
         "lockScreenMonitors": [
         ],
         "lockScreenTint": 0,
-        "radiusRatio": 1.27,
+        "radiusRatio": 1.43,
         "reverseScroll": false,
         "scaleRatio": 1,
         "screenRadiusRatio": 0.71,
@@ -537,11 +537,11 @@
     "nightLight": {
         "autoSchedule": false,
         "dayTemp": "6500",
-        "enabled": false,
+        "enabled": true,
         "forced": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
-        "nightTemp": "4000"
+        "nightTemp": "4606"
     },
     "notifications": {
         "backgroundOpacity": 0.9,

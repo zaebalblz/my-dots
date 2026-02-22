@@ -175,6 +175,12 @@ Singleton {
   */
   function buildPredefinedTemplateConfig(mode) {
     var lines = [];
+    
+    // Add noctalia colors.json template
+    lines.push("[templates.noctalia]");
+    lines.push('input_path = "' + Quickshell.shellDir + '/Assets/Templates/noctalia.json"');
+    lines.push('output_path = "' + Settings.configDir + 'colors.json"');
+
     addApplicationTheming(lines, mode);
 
     if (lines.length > 0) {
