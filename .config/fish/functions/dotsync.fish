@@ -22,6 +22,19 @@ function dotsync
         end
     end
 
+    # Синхронизация папки .gemini (исключая секреты и временные файлы)
+    if test -d "$HOME/.gemini"
+        echo "🧠 Синхронизирую .gemini (память системы)..."
+        mkdir -p "$REPO_DIR/.gemini"
+        rsync -a --delete \
+            --exclude="tmp/" \
+            --exclude="history/" \
+            --exclude="google_accounts.json" \
+            --exclude="oauth_creds.json" \
+            --exclude="installation_id" \
+            "$HOME/.gemini/" "$REPO_DIR/.gemini/"
+    end
+
     # Отдельно синхронизируем файлы в корне .config
     if test -f "$HOME/.config/starship.toml"
         echo "📄 Синхронизирую starship.toml..."
