@@ -55,7 +55,11 @@ function dotsync
     if test -d "$HOME/Документы/scripts"
         echo "📜 Синхронизирую папку со скриптами..."
         mkdir -p "$REPO_DIR/scripts"
-        rsync -a --delete "$HOME/Документы/scripts/" "$REPO_DIR/scripts/"
+        rsync -a --delete \
+            --exclude="__pycache__/" \
+            --exclude="*.pyc" \
+            --exclude="*.pyo" \
+            "$HOME/Документы/scripts/" "$REPO_DIR/scripts/"
     else
         echo "⚠️  Папка со скриптами $HOME/Документы/scripts не найдена!"
     end
