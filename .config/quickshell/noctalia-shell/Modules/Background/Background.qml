@@ -426,7 +426,7 @@ Variants {
         from: 0.0
         to: 1.0
         duration: Settings.data.wallpaper.transitionDuration
-        easing.type: Easing.OutExpo
+        easing.type: Easing.InOutCubic
         onFinished: {
           // Clear the tracking of what we're transitioning to
           transitioningToOriginalPath = "";

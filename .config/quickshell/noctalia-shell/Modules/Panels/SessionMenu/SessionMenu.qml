@@ -18,6 +18,9 @@ SmartPanel {
   readonly property bool largeButtonsStyle: Settings.data.sessionMenu.largeButtonsStyle || false
   readonly property bool largeButtonsLayout: Settings.data.sessionMenu.largeButtonsLayout || "grid"
 
+  // Large buttons style is fullscreen — disable blur behind it
+  blurEnabled: !largeButtonsStyle
+
   // Make panel background transparent for large buttons style
   panelBackgroundColor: largeButtonsStyle ? "transparent" : Color.mSurface
 
@@ -34,7 +37,7 @@ SmartPanel {
     var buttonSpacing = Style.marginS;
     var enabledCount = powerOptions.length;
 
-    var headerSpacing = Settings.data.sessionMenu.showHeader ? (Style.marginL * 2) : 0;
+    var headerSpacing = Settings.data.sessionMenu.showHeader ? Style.margin2L : 0;
     var baseHeight = (Style.marginL * 4) + headerHeight + dividerHeight + headerSpacing;
     var buttonsHeight = enabledCount > 0 ? (buttonHeight * enabledCount) + (buttonSpacing * (enabledCount - 1)) : 0;
 
@@ -157,11 +160,16 @@ SmartPanel {
 
   // Lifecycle handlers
   onOpened: {
-    selectedIndex = -1;
-    ignoreMouseHover = true;
-    globalMouseInitialized = false;
-    mouseTrackingReady = false;
-    mouseTrackingDelayTimer.restart();
+    if (powerOptions.length > 0) {
+      selectedIndex = -1;
+      ignoreMouseHover = true;
+      globalMouseInitialized = false;
+      mouseTrackingReady = false;
+      mouseTrackingDelayTimer.restart();
+    } else {
+      Logger.w("SessionMenu", "Trying to open an empty session menu");
+      root.closeImmediately();
+    }
   }
 
   onClosed: {
@@ -322,13 +330,15 @@ SmartPanel {
       newCol = newCol - 1 < 0 ? grid.itemsInRow(newRow) - 1 : newCol - 1;
       break;
     case "right":
-      newCol = newCol + 1 >= grid.itemsInRow(newRow) ? 0 : newCol + 1;
+      // We already moved to newCol to 0 if grid.currentCol was negative
+      newCol = grid.currentCol < 0 ? newRow : newCol + 1 >= grid.itemsInRow(newRow) ? 0 : newCol + 1;
       break;
     case "up":
       newRow = newRow - 1 < 0 ? grid.rows - 1 : newRow - 1;
       break;
     case "down":
-      newRow = newRow + 1 >= grid.rows ? 0 : newRow + 1;
+      // We already moved to newRow to 0 if grid.currentRow was negative
+      newRow = grid.currentRow < 0 ? newRow : newRow + 1 >= grid.rows ? 0 : newRow + 1;
       break;
     }
 
@@ -560,17 +570,17 @@ SmartPanel {
       }
     }
 
-    // Timer text for large buttons style (above buttons) - positioned absolutely with background
+    // Timer text for large buttons style, positioned absolutely with background
     Rectangle {
       id: timerTextContainer
       visible: largeButtonsStyle && timerActive
       anchors.bottom: largeButtonsContainer.top
       anchors.horizontalCenter: largeButtonsContainer.horizontalCenter
       anchors.bottomMargin: Style.marginM
-      width: timerText.width + Style.marginXL * 2
-      height: timerText.height + Style.marginL * 2
+      width: timerText.width + Style.margin2XL
+      height: timerText.height + Style.margin2L
       radius: Style.radiusM
-      color: Qt.alpha(Color.mSurface, Settings.data.ui.panelBackgroundOpacity)
+      color: Color.mSurfaceVariant
       border.color: Color.mOutline
       border.width: Style.borderS
       z: 1000
@@ -584,7 +594,7 @@ SmartPanel {
                       })
         font.weight: Style.fontWeightBold
         pointSize: Style.fontSizeL
-        color: Color.mOnSurface
+        color: Color.mOnSurfaceVariant
       }
     }
 
@@ -631,6 +641,7 @@ SmartPanel {
       visible: !largeButtonsStyle
       anchors.fill: parent
       anchors.margins: Style.marginL
+      color: Color.mSurface
 
       ColumnLayout {
         anchors.fill: parent
@@ -828,10 +839,10 @@ SmartPanel {
           anchors.left: countdownText.visible ? countdownText.right : parent.left
           anchors.leftMargin: countdownText.visible ? Style.marginXS : 0
           anchors.verticalCenter: parent.verticalCenter
-          width: Math.max(Style.marginXL, labelText.implicitWidth + Style.marginM)
-          height: Style.marginXL
+          width: labelText.implicitWidth + Style.margin2M
+          height: labelText.height + Style.margin2XS
           radius: Math.min(Style.radiusM, height / 2)
-          color: (buttonRoot.isSelected || buttonRoot.effectiveHover) ? Color.mOnPrimary : Qt.alpha(Color.mSurfaceVariant, 0.5)
+          color: (buttonRoot.isSelected || buttonRoot.effectiveHover) ? Color.mOnPrimary : Color.mSurfaceVariant
           border.width: Style.borderS
           border.color: (buttonRoot.isSelected || buttonRoot.effectiveHover) ? Color.mOnPrimary : Color.mOutline
           visible: Settings.data.sessionMenu.showKeybinds && (buttonRoot.keybind !== "") && !buttonRoot.pending
@@ -840,9 +851,8 @@ SmartPanel {
             id: labelText
             anchors.centerIn: parent
             text: buttonRoot.keybind
-            pointSize: Style.fontSizeS
-            font.weight: Style.fontWeightBold
-            color: (buttonRoot.isSelected || buttonRoot.effectiveHover) ? Color.mPrimary : Color.mOnSurface
+            pointSize: Style.fontSizeXS
+            color: (buttonRoot.isSelected || buttonRoot.effectiveHover) ? Color.mPrimary : Color.mOnSurfaceVariant
 
             Behavior on color {
               ColorAnimation {
@@ -938,7 +948,7 @@ SmartPanel {
       if (isSelected || effectiveHover) {
         return Qt.alpha(Color.mPrimary, 1.0);
       }
-      return Qt.alpha(Color.mSurfaceVariant, Settings.data.ui.panelBackgroundOpacity);
+      return Color.mSurface;
     }
 
     border.width: Style.borderS
@@ -1065,8 +1075,8 @@ SmartPanel {
       anchors.top: parent.top
       anchors.right: parent.right
       anchors.margins: Style.marginM
-      width: Math.max(Style.fontSizeM * 2, largeNumberText.implicitWidth + Style.marginM)
-      height: Style.fontSizeM * 2
+      width: largeNumberText.implicitWidth + Style.margin2M
+      height: largeNumberText.implicitHeight + Style.margin2XS
       radius: Math.min(Style.radiusM, height / 2)
       color: (largeButtonRoot.isSelected || largeButtonRoot.effectiveHover) ? Color.mOnPrimary : Qt.alpha(Color.mSurfaceVariant, 0.7)
       border.width: Style.borderS
@@ -1078,12 +1088,11 @@ SmartPanel {
         id: largeNumberText
         anchors.centerIn: parent
         text: largeButtonRoot.keybind
-        pointSize: Style.fontSizeM
-        font.weight: Style.fontWeightBold
+        pointSize: Style.fontSizeS
         color: {
           if (largeButtonRoot.isSelected || largeButtonRoot.effectiveHover)
             return Color.mPrimary;
-          return Color.mOnSurface;
+          return Color.mOnSurfaceVariant;
         }
 
         Behavior on color {

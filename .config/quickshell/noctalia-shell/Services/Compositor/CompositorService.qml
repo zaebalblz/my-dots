@@ -494,8 +494,17 @@ Singleton {
       return;
 
     HooksService.executeSessionHook("rebootToUefi", () => {
-                                      Quickshell.execDetached(["sh", "-c", "systemctl reboot --firmware-setup"]);
+                                      Quickshell.execDetached(["sh", "-c", "systemctl reboot --firmware-setup || loginctl reboot --firmware-setup"]);
                                     });
+  }
+
+  function turnOffMonitors() {
+    Logger.i("Compositor", "Turn off monitors requested");
+    if (backend && backend.turnOffMonitors) {
+      backend.turnOffMonitors();
+    } else {
+      Logger.w("Compositor", "No backend available for turnOffMonitors");
+    }
   }
 
   function suspend() {

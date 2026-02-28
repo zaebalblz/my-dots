@@ -33,6 +33,7 @@
         "preferredPlayer": "",
         "visualizerType": "mirrored",
         "volumeFeedback": false,
+        "volumeFeedbackSoundFile": "",
         "volumeOverdrive": false,
         "volumeStep": 10
     },
@@ -43,9 +44,11 @@
         "barType": "framed",
         "capsuleColorKey": "none",
         "capsuleOpacity": 1,
+        "contentPadding": 2,
         "density": "comfortable",
         "displayMode": "always_visible",
         "floating": false,
+        "fontScale": 1,
         "frameRadius": 19,
         "frameThickness": 12,
         "hideOnOverview": false,
@@ -70,8 +73,10 @@
             }
         ],
         "showCapsule": true,
+        "showOnWorkspaceSwitch": true,
         "showOutline": false,
         "useSeparateOpacity": false,
+        "widgetSpacing": 6,
         "widgets": {
             "center": [
                 {
@@ -96,9 +101,13 @@
             ],
             "left": [
                 {
+                    "colorizeSystemIcon": "none",
+                    "customIconPath": "",
+                    "enableColorization": false,
                     "icon": "rocket",
                     "iconColor": "none",
-                    "id": "Launcher"
+                    "id": "Launcher",
+                    "useDistroLogo": false
                 },
                 {
                     "compactMode": true,
@@ -288,6 +297,8 @@
         }
     },
     "brightness": {
+        "backlightDeviceMappings": [
+        ],
         "brightnessStep": 5,
         "enableDdcSupport": true,
         "enforceMinimum": false
@@ -314,7 +325,7 @@
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
-        "predefinedScheme": "Peche",
+        "predefinedScheme": "Ayu",
         "schedulingMode": "off",
         "useWallpaperColors": true
     },
@@ -415,7 +426,8 @@
                 "widgets": [
                 ]
             }
-        ]
+        ],
+        "overviewEnabled": true
     },
     "dock": {
         "animationSpeed": 0.79,
@@ -426,7 +438,13 @@
         "dockType": "floating",
         "enabled": true,
         "floatingRatio": 0.74,
+        "groupApps": false,
+        "groupClickAction": "cycle",
+        "groupContextMenuMode": "extended",
+        "groupIndicatorStyle": "dots",
         "inactiveIndicators": false,
+        "launcherIconColor": "none",
+        "launcherPosition": "end",
         "monitors": [
             "DP-3"
         ],
@@ -436,6 +454,7 @@
         "pinnedStatic": false,
         "position": "right",
         "showFrameIndicator": true,
+        "showLauncherIcon": false,
         "sitOnFrame": false,
         "size": 0.98
     },
@@ -486,6 +505,7 @@
         "lockScreenMonitors": [
         ],
         "lockScreenTint": 0,
+        "passwordChars": false,
         "radiusRatio": 1.43,
         "reverseScroll": false,
         "scaleRatio": 1,
@@ -510,6 +530,14 @@
         "startup": "",
         "wallpaperChange": ""
     },
+    "idle": {
+        "customCommands": "[]",
+        "enabled": false,
+        "fadeDuration": 5,
+        "lockTimeout": 660,
+        "screenOffTimeout": 600,
+        "suspendTimeout": 1800
+    },
     "location": {
         "analogClockInCalendar": false,
         "firstDayOfWeek": -1,
@@ -531,6 +559,7 @@
         "bluetoothRssiPollIntervalMs": 10000,
         "bluetoothRssiPollingEnabled": false,
         "disableDiscoverability": false,
+        "networkPanelView": "wifi",
         "wifiDetailsViewMode": "grid",
         "wifiEnabled": true
     },
@@ -682,22 +711,6 @@
         "activeTemplates": [
             {
                 "enabled": true,
-                "id": "mango"
-            },
-            {
-                "enabled": true,
-                "id": "kitty"
-            },
-            {
-                "enabled": true,
-                "id": "zenBrowser"
-            },
-            {
-                "enabled": true,
-                "id": "alacritty"
-            },
-            {
-                "enabled": true,
                 "id": "telegram"
             },
             {
@@ -714,23 +727,7 @@
             },
             {
                 "enabled": true,
-                "id": "sway"
-            },
-            {
-                "enabled": true,
-                "id": "fuzzel"
-            },
-            {
-                "enabled": true,
-                "id": "ghostty"
-            },
-            {
-                "enabled": true,
                 "id": "hyprland"
-            },
-            {
-                "enabled": true,
-                "id": "wezterm"
             },
             {
                 "enabled": true,
@@ -738,51 +735,11 @@
             },
             {
                 "enabled": true,
-                "id": "zathura"
-            },
-            {
-                "enabled": true,
                 "id": "discord"
             },
             {
                 "enabled": true,
-                "id": "zed"
-            },
-            {
-                "enabled": true,
-                "id": "niri"
-            },
-            {
-                "enabled": true,
-                "id": "spicetify"
-            },
-            {
-                "enabled": true,
-                "id": "vicinae"
-            },
-            {
-                "enabled": true,
-                "id": "helix"
-            },
-            {
-                "enabled": true,
-                "id": "emacs"
-            },
-            {
-                "enabled": true,
-                "id": "walker"
-            },
-            {
-                "enabled": true,
-                "id": "pywalfox"
-            },
-            {
-                "enabled": true,
                 "id": "gtk"
-            },
-            {
-                "enabled": true,
-                "id": "scroll"
             },
             {
                 "enabled": true,
@@ -799,24 +756,25 @@
             {
                 "enabled": true,
                 "id": "cava"
+            },
+            {
+                "enabled": true,
+                "id": "kitty"
             }
         ],
         "enableUserTheming": true
     },
     "ui": {
-        "bluetoothDetailsViewMode": "grid",
-        "bluetoothHideUnnamedDevices": false,
         "boxBorderEnabled": false,
         "fontDefault": "Ubuntu Nerd Font",
         "fontDefaultScale": 1,
         "fontFixed": "UbuntuMono Nerd Font",
         "fontFixedScale": 1.14,
-        "networkPanelView": "wifi",
-        "panelBackgroundOpacity": 0.85,
+        "panelBackgroundOpacity": 0.77,
         "panelsAttachedToBar": true,
         "settingsPanelMode": "attached",
-        "tooltipsEnabled": true,
-        "wifiDetailsViewMode": "grid"
+        "settingsPanelSideBarCardStyle": false,
+        "tooltipsEnabled": true
     },
     "wallpaper": {
         "automationEnabled": false,
@@ -825,7 +783,7 @@
         "enabled": true,
         "favorites": [
             {
-                "colorScheme": "Peche",
+                "colorScheme": "Ayu",
                 "darkMode": true,
                 "generationMethod": "faithful",
                 "paletteColors": [
@@ -853,7 +811,7 @@
         "skipStartupTransition": false,
         "solidColor": "#1a00ff",
         "sortOrder": "date_desc",
-        "transitionDuration": 2100,
+        "transitionDuration": 1200,
         "transitionEdgeSmoothness": 0,
         "transitionType": "random",
         "useSolidColor": false,

@@ -12,8 +12,8 @@ import qs.Widgets
 SmartPanel {
   id: root
 
-  preferredWidth: 1300 * Style.uiScaleRatio
-  preferredHeight: 750 * Style.uiScaleRatio
+  preferredWidth: 800 * Style.uiScaleRatio
+  preferredHeight: 600 * Style.uiScaleRatio
   preferredWidthRatio: 0.5
   preferredHeightRatio: 0.45
 
@@ -264,7 +264,7 @@ SmartPanel {
       // Header
       NBox {
         Layout.fillWidth: true
-        Layout.preferredHeight: headerColumn.implicitHeight + Style.marginL * 2
+        Layout.preferredHeight: headerColumn.implicitHeight + Style.margin2L
         color: Color.mSurfaceVariant
 
         ColumnLayout {
@@ -1039,7 +1039,7 @@ SmartPanel {
           positionViewAtBeginning();
         }
 
-        property int columns: 8
+        property int columns: (screen.width > 1920) ? 5 : 4
         property int itemSize: cellWidth
 
         cellWidth: Math.floor((availableWidth - leftMargin - rightMargin) / columns)
@@ -1511,7 +1511,7 @@ SmartPanel {
             positionViewAtBeginning();
           }
 
-          property int columns: 8
+          property int columns: (screen.width > 1920) ? 5 : 4
           property int itemSize: cellWidth
 
           cellWidth: Math.floor((availableWidth - leftMargin - rightMargin) / columns)

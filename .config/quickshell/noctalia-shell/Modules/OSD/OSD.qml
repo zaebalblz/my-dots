@@ -407,15 +407,15 @@ Variants {
           const fontSize = Style.fontSizeS * Settings.data.ui.fontFixedScale * Style.uiScaleRatio;
           const estimatedWidth = text.length * fontSize * 0.6;
           const iconWidth = Style.fontSizeXL * Style.uiScaleRatio;
-          const margins = Style.marginL * 2;
+          const margins = Style.margin2L;
           const spacing = Style.marginM;
-          const bgMargins = Style.marginM * 1.5 * 2;
+          const bgMargins = Style.margin2M * 1.5;
           return Math.max(shortHWidth, Math.round((estimatedWidth + iconWidth + margins + spacing + bgMargins) * 1.1));
         }
         const iconWidth = Style.fontSizeXL * Style.uiScaleRatio;
-        const margins = Style.marginL * 2; // Left and right content margins
+        const margins = Style.margin2L; // Left and right content margins
         const spacing = Style.marginM; // Spacing between icon and text
-        const bgMargins = Style.marginM * 1.5 * 2; // Background margins
+        const bgMargins = Style.margin2M * 1.5; // Background margins
         const totalWidth = textWidth + iconWidth + margins + spacing + bgMargins;
         // Ensure minimum width and add some buffer
         return Math.max(shortHWidth, Math.round(totalWidth * 1.1));
@@ -438,8 +438,8 @@ Variants {
         const textHeight = charCount * charHeight;
         // Background margins (Style.marginM * 1.5 * 2 for top and bottom)
         const bgMargins = Style.marginM * 1.5 * 2;
-        // Content margins (Style.marginL * 2 for top and bottom)
-        const contentMargins = Style.marginL * 2;
+        // Content margins (Style.margin2L for top and bottom)
+        const contentMargins = Style.margin2L;
         // Icon size: fontSizeXL scaled, with extra space for icon rendering and padding
         const iconSize = Style.fontSizeXL * Style.uiScaleRatio * 1.8; // Add 80% for icon rendering and padding
         // Spacing between text and icon (Style.marginM for lock keys)
@@ -507,14 +507,14 @@ Variants {
 
         Behavior on opacity {
           NumberAnimation {
-            duration: 140
+            duration: Style.animationNormal
             easing.type: Easing.InOutQuad
           }
         }
 
         Behavior on scale {
           NumberAnimation {
-            duration: 140
+            duration: Style.animationNormal
             easing.type: Easing.InOutQuad
           }
         }
@@ -527,7 +527,7 @@ Variants {
 
         Timer {
           id: visibilityTimer
-          interval: 140 + 50
+          interval: Style.animationNormal + 50
           onTriggered: {
             osdItem.visible = false;
             root.currentOSDType = -1;
@@ -587,7 +587,7 @@ Variants {
 
               Behavior on color {
                 ColorAnimation {
-                  duration: 140
+                  duration: Style.animationNormal
                   easing.type: Easing.InOutQuad
                 }
               }
@@ -624,13 +624,13 @@ Variants {
 
                 Behavior on width {
                   NumberAnimation {
-                    duration: 140
+                    duration: Style.animationNormal
                     easing.type: Easing.InOutQuad
                   }
                 }
                 Behavior on color {
                   ColorAnimation {
-                    duration: 140
+                    duration: Style.animationNormal
                     easing.type: Easing.InOutQuad
                   }
                 }
@@ -755,13 +755,13 @@ Variants {
 
                   Behavior on height {
                     NumberAnimation {
-                      duration: 140
+                      duration: Style.animationNormal
                       easing.type: Easing.InOutQuad
                     }
                   }
                   Behavior on color {
                     ColorAnimation {
-                      duration: 140
+                      duration: Style.animationNormal
                       easing.type: Easing.InOutQuad
                     }
                   }
@@ -779,7 +779,7 @@ Variants {
 
               Behavior on color {
                 ColorAnimation {
-                  duration: 140
+                  duration: Style.animationNormal
                   easing.type: Easing.InOutQuad
                 }
               }

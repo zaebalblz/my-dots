@@ -127,13 +127,13 @@ Item {
       iconWidth = artSize;
     }
 
-    var margins = isVertical ? 0 : (Style.marginS * 2);
+    var margins = isVertical ? 0 : Style.margin2S;
 
     // Add spacing and text width
     var textWidth = 0;
     if (titleContainer.measuredWidth > 0) {
       margins += Style.marginS;
-      textWidth = titleContainer.measuredWidth + Style.marginXS;
+      textWidth = titleContainer.measuredWidth + Style.margin2XXS;
     }
 
     var total = iconWidth + textWidth + margins;
@@ -147,19 +147,19 @@ Item {
   Behavior on opacity {
     NumberAnimation {
       duration: Style.animationNormal
-      easing.type: Easing.OutExpo
+      easing.type: Easing.InOutCubic
     }
   }
   Behavior on implicitWidth {
     NumberAnimation {
       duration: Style.animationNormal
-      easing.type: Easing.OutExpo
+      easing.type: Easing.InOutCubic
     }
   }
   Behavior on implicitHeight {
     NumberAnimation {
       duration: Style.animationNormal
-      easing.type: Easing.OutExpo
+      easing.type: Easing.InOutCubic
     }
   }
 
@@ -249,13 +249,13 @@ Item {
     Behavior on width {
       NumberAnimation {
         duration: Style.animationNormal
-        easing.type: Easing.OutExpo
+        easing.type: Easing.InOutCubic
       }
     }
     Behavior on height {
       NumberAnimation {
         duration: Style.animationNormal
-        easing.type: Easing.OutExpo
+        easing.type: Easing.InOutCubic
       }
     }
 

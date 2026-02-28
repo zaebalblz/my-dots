@@ -30,6 +30,7 @@ import qs.Modules.Panels.Settings
 import qs.Modules.Toast
 import qs.Services.Control
 import qs.Services.Hardware
+import qs.Services.Keyboard
 import qs.Services.Location
 import qs.Services.Networking
 import qs.Services.Noctalia
@@ -109,12 +110,19 @@ ShellRoot {
           HooksService.init();
           BluetoothService.init();
           IdleInhibitorService.init();
+          IdleService.init();
           PowerProfileService.init();
           HostService.init();
           GitHubService.init();
           SupporterService.init();
           CustomButtonIPCService.init();
           IPCService.init(screenDetector);
+
+          // Force ClipboardService initialization so clipboard watchers
+          // start immediately instead of waiting for first launcher open
+          if (Settings.data.appLauncher.enableClipboardHistory) {
+            ClipboardService.checkCliphistAvailability();
+          }
         });
 
         delayedInitTimer.running = true;
@@ -138,6 +146,7 @@ ShellRoot {
       }
 
       LockScreen {}
+      FadeOverlay {}
 
       // Settings window mode (single window across all monitors)
       SettingsPanelWindow {}

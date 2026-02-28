@@ -143,6 +143,16 @@ Singleton {
     Logger.i("BarService", "Service started");
   }
 
+  // Bump widgetsRevision when settings are reloaded from an external file change
+  // so Bar.qml re-syncs its widget ListModels with the updated widget configuration
+  Connections {
+    target: Settings
+    function onSettingsReloaded() {
+      Logger.d("BarService", "Settings reloaded externally, bumping widgetsRevision");
+      root.widgetsRevision++;
+    }
+  }
+
   // update bar's hidden state when mode changes
   Connections {
     target: Settings.data.bar
@@ -179,6 +189,43 @@ Singleton {
             setScreenHidden(screenName, false);
           }
         }
+      }
+    }
+  }
+
+  // Track last workspace ID to detect actual workspace changes
+  property var lastWorkspaceId: null
+
+  // Workspace switch handler - directly show bar on the focused workspace screen
+  Connections {
+    target: CompositorService
+    function onWorkspaceChanged() {
+      if (!Settings.data.bar.showOnWorkspaceSwitch)
+        return;
+      if (Settings.data.bar.displayMode !== "auto_hide")
+        return;
+
+      var ws = CompositorService.getCurrentWorkspace();
+      if (!ws || !ws.output) {
+        return;
+      }
+
+      // Only trigger if workspace actually changed
+      var currentWsId = ws.id;
+      if (currentWsId === root.lastWorkspaceId) {
+        return;
+      }
+      root.lastWorkspaceId = currentWsId;
+
+      var screenName = ws.output || "";
+      Logger.d("BarService", "Workspace switched to:", currentWsId, "on screen:", screenName);
+
+      // Show bar immediately
+      setScreenHidden(screenName, false);
+
+      // Only trigger hideTimer if not already hovered (e.g., mouse on trigger zone)
+      if (!root.isBarHovered(screenName)) {
+        barHoverStateChanged(screenName, false);
       }
     }
   }

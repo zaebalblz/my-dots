@@ -496,6 +496,15 @@ Item {
     }
   }
 
+  // Some programs change title of window dependent on content
+  Connections {
+    target: ToplevelManager ? ToplevelManager.activeToplevel : null
+    enabled: initialized
+    function onTitleChanged() {
+      updateTimer.restart();
+    }
+  }
+
   Connections {
     target: I3
     enabled: initialized
@@ -541,6 +550,14 @@ Item {
       window.handle.close();
     } catch (e) {
       Logger.e("SwayService", "Failed to close window:", e);
+    }
+  }
+
+  function turnOffMonitors() {
+    try {
+      Quickshell.execDetached([msgCommand, "output", "*", "dpms", "off"]);
+    } catch (e) {
+      Logger.e("SwayService", "Failed to turn off monitors:", e);
     }
   }
 

@@ -231,14 +231,6 @@ Singleton {
                               "key": "honeycomb",
                               "name": I18n.tr("wallpaper.transitions.honeycomb")
                             });
-    transitionsModel.append({
-                              "key": "iris_bloom",
-                              "name": "Iris Bloom"
-                            });
-    transitionsModel.append({
-                              "key": "portal",
-                              "name": "Portal"
-                            });
   }
 
   // -------------------------------------------------------------------
@@ -953,8 +945,10 @@ Singleton {
   // -------------------------------------------------------------------
   function _findFavoriteIndex(path) {
     var favorites = Settings.data.wallpaper.favorites;
+    var searchPath = Settings.preprocessPath(path);
+
     for (var i = 0; i < favorites.length; i++) {
-      if (favorites[i].path === path) {
+      if (Settings.preprocessPath(favorites[i].path) === searchPath) {
         return i;
       }
     }
@@ -1042,7 +1036,7 @@ Singleton {
       return;
 
     var favorites = Settings.data.wallpaper.favorites.slice();
-    favorites[existingIndex] = _createFavoriteEntry(path);
+    favorites[existingIndex] = _createFavoriteEntry(favorites[existingIndex].path);
     Settings.data.wallpaper.favorites = favorites;
     Logger.d("Wallpaper", "Updated color scheme for favorite:", path);
     favoriteDataUpdated(path);

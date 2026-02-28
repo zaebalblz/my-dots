@@ -14,6 +14,7 @@ import qs.Modules.Panels.Settings.Tabs.ControlCenter
 import qs.Modules.Panels.Settings.Tabs.Display
 import qs.Modules.Panels.Settings.Tabs.Dock
 import qs.Modules.Panels.Settings.Tabs.Hooks
+import qs.Modules.Panels.Settings.Tabs.Idle
 import qs.Modules.Panels.Settings.Tabs.Launcher
 import qs.Modules.Panels.Settings.Tabs.LockScreen
 import qs.Modules.Panels.Settings.Tabs.Notifications
@@ -62,7 +63,7 @@ Item {
   property real _lastMouseY: 0
   property bool _mouseInitialized: false
 
-  readonly property bool panelVeryTransparent: Settings.data.ui.panelBackgroundOpacity <= 0.75
+  readonly property bool sidebarCardStyle: Settings.data.ui.settingsPanelSideBarCardStyle
 
   onSearchResultsChanged: {
     searchSelectedIndex = 0;
@@ -325,13 +326,29 @@ Item {
     highlightOverlay.opacity = 0;
   }
 
-  // Find and highlight a widget by its label key
+  function isEffectivelyVisible(item) {
+    var current = item;
+    while (current) {
+      if (current.visible === false)
+        return false;
+      if (current.opacity !== undefined && current.opacity <= 0)
+        return false;
+      current = current.parent;
+    }
+    return true;
+  }
+
+  // Find and highlight a widget by its label key.
   function findAndHighlightWidget(item, labelKey) {
     if (!item)
       return null;
 
-    // Check if this item has a matching label
-    if (item.hasOwnProperty("label") && item.label === I18n.tr(labelKey)) {
+    // Skip hidden branches to avoid highlighting controls that are not on screen.
+    if (!isEffectivelyVisible(item))
+      return null;
+
+    // Check if this item has a matching label.
+    if (item.hasOwnProperty("label") && item.label === I18n.tr(labelKey) && item.width > 0 && item.height > 0) {
       return item;
     }
 
@@ -371,8 +388,8 @@ Item {
             const overlayPos = widget.mapToItem(tabContentArea, 0, 0);
             highlightOverlay.x = overlayPos.x - Style.marginM;
             highlightOverlay.y = overlayPos.y - Style.marginM;
-            highlightOverlay.width = widget.width + Style.marginM * 2;
-            highlightOverlay.height = widget.height + Style.marginM * 2;
+            highlightOverlay.width = widget.width + Style.margin2M;
+            highlightOverlay.height = widget.height + Style.margin2M;
             highlightAnimation.restart();
           });
         }
@@ -445,6 +462,10 @@ Item {
   Component {
     id: hooksTab
     HooksTab {}
+  }
+  Component {
+    id: idleTab
+    IdleTab {}
   }
   Component {
     id: dockTab
@@ -562,6 +583,12 @@ Item {
             "label": "session-menu.title",
             "icon": "settings-session-menu",
             "source": sessionMenuTab
+          },
+          {
+            "id": SettingsPanel.Tab.Idle,
+            "label": "common.idle",
+            "icon": "settings-idle",
+            "source": idleTab
           },
           {
             "id": SettingsPanel.Tab.Audio,
@@ -737,13 +764,13 @@ Item {
         id: sidebar
 
         clip: true
-        Layout.preferredWidth: Math.round(root.sidebarExpanded ? 200 * Style.uiScaleRatio : sidebarToggle.width + (root.panelVeryTransparent ? Style.marginXL : 0) + (sidebarList.verticalScrollBarActive ? Style.marginM : 0))
+        Layout.preferredWidth: Math.round(root.sidebarExpanded ? 200 * Style.uiScaleRatio : sidebarToggle.width + (root.sidebarCardStyle ? Style.margin2M : 0) + (sidebarList.verticalScrollBarActive ? Style.marginM : 0))
         Layout.fillHeight: true
         Layout.alignment: Qt.AlignTop
 
-        radius: root.panelVeryTransparent ? Style.radiusM : 0
-        color: root.panelVeryTransparent ? Color.mSurfaceVariant : "transparent"
-        border.color: root.panelVeryTransparent ? Style.boxBorderColor : "transparent"
+        radius: root.sidebarCardStyle ? Style.radiusM : 0
+        color: root.sidebarCardStyle ? Color.mSurfaceVariant : "transparent"
+        border.color: root.sidebarCardStyle ? Style.boxBorderColor : "transparent"
 
         Behavior on Layout.preferredWidth {
           NumberAnimation {
@@ -756,17 +783,17 @@ Item {
         ColumnLayout {
           anchors.fill: parent
           spacing: Style.marginS
-          anchors.margins: root.panelVeryTransparent ? Style.marginM : 0
+          anchors.margins: root.sidebarCardStyle ? Style.marginM : 0
 
           // Sidebar toggle button
           Item {
             id: toggleContainer
             Layout.fillWidth: true
-            Layout.preferredHeight: Math.round(toggleRow.implicitHeight + Style.marginS * 2)
+            Layout.preferredHeight: Math.round(toggleRow.implicitHeight + Style.margin2S)
 
             Rectangle {
               id: sidebarToggle
-              width: Math.round(toggleRow.implicitWidth + Style.marginS * 2)
+              width: Math.round(toggleRow.implicitWidth + Style.margin2S)
               height: parent.height
               anchors.left: parent.left
               radius: Style.radiusS
@@ -817,7 +844,7 @@ Item {
           Item {
             id: searchContainerWrapper
             Layout.fillWidth: true
-            Layout.preferredHeight: searchInput.implicitHeight > 0 ? searchInput.implicitHeight : (Style.fontSizeXL + Style.marginM * 2)
+            Layout.preferredHeight: searchInput.implicitHeight > 0 ? searchInput.implicitHeight : (Style.fontSizeXL + Style.margin2M)
 
             // Search input
             NTextInput {
@@ -850,7 +877,7 @@ Item {
               anchors.left: parent.left
               anchors.right: parent.right
               anchors.verticalCenter: parent.verticalCenter
-              height: Math.round(searchCollapsedRow.implicitHeight + Style.marginS * 2)
+              height: Math.round(searchCollapsedRow.implicitHeight + Style.margin2S)
               visible: opacity > 0
               opacity: !root.sidebarExpanded ? 1.0 : 0.0
 
@@ -863,7 +890,7 @@ Item {
 
               Rectangle {
                 id: searchCollapsedButton
-                width: Math.round(searchCollapsedRow.implicitWidth + Style.marginS * 2)
+                width: Math.round(searchCollapsedRow.implicitWidth + Style.margin2S)
                 height: parent.height
                 anchors.left: parent.left
                 radius: Style.radiusS
@@ -950,7 +977,7 @@ Item {
               delegate: Rectangle {
                 id: resultItem
                 width: searchResultsList.width - (searchResultsList.verticalScrollBarActive ? Style.marginM : 0)
-                height: resultColumn.implicitHeight + Style.marginM * 2
+                height: resultColumn.implicitHeight + Style.margin2M
                 radius: Style.iRadiusS
                 readonly property bool selected: index === root.searchSelectedIndex
                 readonly property bool effectiveHover: !root.ignoreMouseHover && resultMouseArea.containsMouse
@@ -1032,7 +1059,7 @@ Item {
               delegate: Rectangle {
                 id: tabItem
                 width: sidebarList.width
-                height: tabEntryRow.implicitHeight + Style.marginS * 2
+                height: tabEntryRow.implicitHeight + Style.margin2XS
                 radius: Style.iRadiusS
                 color: selected ? Color.mPrimary : (tabItem.hovering ? Color.mHover : "transparent")
                 readonly property bool selected: index === root.currentTabIndex
