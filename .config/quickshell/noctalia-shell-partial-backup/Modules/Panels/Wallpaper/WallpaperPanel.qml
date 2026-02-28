@@ -837,14 +837,14 @@ SmartPanel {
             return; // Stale callback from a superseded navigation
           wallpapersList = result.files;
           directoriesList = result.directories;
-          Logger.d("WallpaperPanel", "Browse mode: Got", wallpapersList.length, "files and", directoriesList.length, "directories for screen", targetScreen.name);
+          Logger.d("", "Browse mode: Got", wallpapersList.length, "files and", directoriesList.length, "directories for screen", targetScreen.name);
           updateFiltered();
         });
       } else {
         // Normal mode: just use the wallpaper list from service
         wallpapersList = WallpaperService.getWallpapersList(targetScreen.name);
         directoriesList = [];
-        Logger.d("WallpaperPanel", "Got", wallpapersList.length, "wallpapers for screen", targetScreen.name);
+        Logger.d("", "Got", wallpapersList.length, "wallpapers for screen", targetScreen.name);
         updateFiltered();
       }
     }

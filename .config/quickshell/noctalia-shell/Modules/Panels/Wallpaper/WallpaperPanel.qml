@@ -13,7 +13,7 @@ SmartPanel {
   id: root
 
   preferredWidth: 800 * Style.uiScaleRatio
-  preferredHeight: 600 * Style.uiScaleRatio
+  preferredHeight: 900 * Style.uiScaleRatio
   preferredWidthRatio: 0.5
   preferredHeightRatio: 0.45
 
