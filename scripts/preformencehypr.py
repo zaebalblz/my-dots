@@ -18,7 +18,6 @@ PERF_CONF = HYPR_DIR / "performance-mode.conf"
 ACTIVE_COLORS = HYPR_DIR / "active-colors.conf"
 
 WAYBAR_MINI_DIR = CONFIG / "waybar-mini"
-MINI_COLORS = WAYBAR_MINI_DIR / "colors-mini.conf"
 WAYBAR_CONFIG = WAYBAR_MINI_DIR / "config.jsonc"
 WAYBAR_STYLE = WAYBAR_MINI_DIR / "style.css"
 
@@ -27,8 +26,6 @@ KITTY_MINI_INC = CONFIG / "kitty/waybar-mini.conf"
 KITTY_MINI_SRC = WAYBAR_MINI_DIR / "kitty-mini.conf"
 
 VSCODE_SETTINGS = CONFIG / "Code/User/settings.json"
-
-# --- Helper Functions ---
 
 def run(cmd):
     subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
@@ -63,18 +60,13 @@ $windowRounding = 0
 $workspaceGaps = 0
 $windowGapsIn = 0
 $windowGapsOut = 0
-$singleWindowGapsOut = 0
 $windowBorderSize = 2
-$activeWindowBorderColour = rgba(45475aee)
-$inactiveWindowBorderColour = rgba(15121bee)
 
 general {
     gaps_in = 0
     gaps_out = 0
     gaps_workspaces = 0
     border_size = 2
-    col.active_border = $activeWindowBorderColour
-    col.inactive_border = $inactiveWindowBorderColour
 }
 decoration {
     rounding = 0
@@ -84,37 +76,25 @@ decoration {
 animations {
     enabled = false
 }
-
-workspace = w[tv1]s[false], gapsout:0
-workspace = f[1]s[false], gapsout:0
-
-# Volume limit override (100%)
-bindel = , XF86AudioRaiseVolume, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ 0; wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+
 """)
     
-    # GTK
     run(["gsettings", "set", "org.gnome.desktop.interface", "gtk-theme", "Adwaita-dark"])
     run(["gsettings", "set", "org.gnome.desktop.interface", "icon-theme", "Adwaita"])
     
-    # Kitty
     if KITTY_CONF.exists():
         content = KITTY_CONF.read_text()
         if "include waybar-mini.conf" not in content:
             content += "\ninclude waybar-mini.conf\n"
         content = re.sub(r"background_opacity\s+[\d\.]+", "background_opacity 1.0", content)
         KITTY_CONF.write_text(content)
-        if KITTY_MINI_SRC.exists():
-            shutil.copy(KITTY_MINI_SRC, KITTY_MINI_INC)
-        run(["kitty", "@", "set-colors", "--all", str(KITTY_MINI_SRC)])
+        if KITTY_MINI_SRC.exists(): shutil.copy(KITTY_MINI_SRC, KITTY_MINI_INC)
         run(["kitty", "@", "set-background-opacity", "--all", "1.0"])
 
     update_vscode_theme("Default Dark Modern")
     run(["fish", "-c", "set -Ux fish_color_scheme Snowman"])
 
-    # Shell Switch - SYNC to avoid race conditions
     run_sync(["/home/linuxoed/Документы/scripts/kill_shell.sh"])
     run(["waybar", "-c", str(WAYBAR_CONFIG), "-s", str(WAYBAR_STYLE)])
-    
     run_sync(["hyprctl", "batch", "reload; notify-send 'Performance' 'ULTRA Mode Enabled' -t 1000"])
 
 def disable_ultra():
@@ -130,15 +110,12 @@ def disable_ultra():
         KITTY_CONF.write_text(content)
         if KITTY_MINI_INC.exists(): KITTY_MINI_INC.unlink()
         run(["kitty", "@", "set-background-opacity", "--all", "0.75"])
-        run(["killall", "-USR1", "kitty"])
 
     update_vscode_theme("Cyberpunk")
     run(["fish", "-c", "set -Ux fish_color_scheme Dracula"])
 
-    # Restore Shell
     run_sync(["killall", "waybar"])
     run(["/home/linuxoed/Документы/scripts/restart_shell.sh"])
-    
     run_sync(["hyprctl", "batch", "reload; notify-send 'Performance' 'Normal Mode Restored' -t 1000"])
 
 if __name__ == "__main__":
