@@ -58,3 +58,4 @@ end
    alias cm 'cmatrix'
    alias pipe 'pipes.sh'
    alias ttyc 'tty-clock -s -t -c -D'
+   alias vimn 'nix run github:onelocked/vimmax/f6b0284d888ffd443195eb817fe1ce19fea30144'
